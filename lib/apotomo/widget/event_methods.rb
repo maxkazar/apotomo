@@ -13,6 +13,7 @@ module Apotomo
           
           if target_id = options[:passing]
              target = root.find_widget(target_id)
+             options = options.clone
              options[:on] ||= widget_id
           end
           
