@@ -80,7 +80,9 @@ module Apotomo
       options = options.reverse_merge(:once => true,
                                       :with => type,
                                       :on   => widget_id)
-      
+
+      options[:on] = options[:on].call(widget_id) if options[:on].is_a? Proc
+
       handler = InvokeEventHandler.new(:widget_id => options[:on], :state => options[:with])
       return if options[:once] and event_table.all_handlers_for(type, options[:from]).include?(handler)
       
